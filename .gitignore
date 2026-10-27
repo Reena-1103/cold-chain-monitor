@@ -11,3 +11,4 @@ data_check/
 data/
 data_large/
 data_large_30days/
+dashboard/app_backup.py
