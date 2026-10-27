@@ -1,0 +1,13 @@
+
+.venv/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+.env
+*.db
+data_check/
+
+# Generated datasets and reports
+data/
+data_large/
+data_large_30days/
