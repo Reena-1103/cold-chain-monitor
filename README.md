@@ -1,7 +1,7 @@
-
 # Cold Chain Monitoring System
 
-A Python-based cold-chain monitoring project for analyzing shipment sensor readings, identifying temperature and humidity threshold violations, and reporting temperature excursion events.
+- `app/` - data generation, database models, rules, validation, and reporting
+- `dashboard/` - Streamlit dashboard
 
 ## Features
 
@@ -9,17 +9,20 @@ A Python-based cold-chain monitoring project for analyzing shipment sensor readi
 - Product-specific temperature and humidity thresholds
 - Sensor reading validation
 - Temperature and humidity visualizations
-- Excursion event detection and reporting
+- Excursion event detection and CSV reporting
 - Automated unit tests
 - SQLite database models
+- Streamlit dashboard for exploring shipment data
 
 ## Project Structure
 
 - `app/` — data generation, database models, rules, validation, and reporting
 - `dashboard/` — Streamlit dashboard
-- `data/` — generated CSV datasets and excursion report
-- `tests/` — automated tests
-- `cold_chain.db` — local SQLite database
+- `tests/` — automated unit tests
+- `requirements.txt` — Python dependencies
+- `README.md` — project documentation
+
+Generated datasets, database files, and reports are created locally and are not required to be committed to the repository.
 
 ## Setup
 
@@ -46,35 +49,46 @@ streamlit run dashboard/app.py
 
 ## Generate the Excursion Report
 
+For the large dataset:
+
 ```powershell
-python -m app.excursion_report
+python -m app.excursion_report --data-dir data_large_30days
 ```
 
 ## Validate the Dataset
 
+Run the large-dataset validation script:
+
 ```powershell
-python -m app.validate_data
+python -m app.validate_large_data
 ```
 
 ## Run Tests
 
 ```powershell
-python -m pytest -q
+python -m pytest -v
 ```
 
-## Current Validation Results
+## Latest Large-Dataset Validation
 
-The current generated dataset contains:
+The latest recorded large-dataset validation reported:
 
-- 2 products
-- 10 shipments
-- 10 containers
-- 20 sensors
-- 23,592 sensor readings
-- 12 ground-truth labels
+- Products: 2
+- Shipments: 1,000
+- Containers: 1,000
+- Sensors: 2,000
+- Sensor readings: 1,983,168
+- Ground-truth labels: 1,500
+- Calibrated sensors: 2,000
+- Duplicate reading IDs: 0
+- Invalid reading units: 0
+- Invalid humidity values: 0
+- Invalid timestamps: 0
 
-The currently implemented validation checks pass, and all 5 existing tests pass.
+The latest recorded unit-test run passed all 17 tests.
+
+The excursion report recorded 250 events, with all 1,500 ground-truth labels matching an event. This coverage result does not, by itself, establish overall detection precision or recall.
 
 ## Limitations
 
-These results describe the current implementation only. They do not establish that every possible cold-chain scenario or every project requirement has been implemented.
+Validation results describe the tested datasets and implemented checks. They do not establish that every possible cold-chain scenario or every project requirement has been implemented.
